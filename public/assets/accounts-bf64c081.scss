@@ -7,9 +7,6 @@
  * depending on specificity.
  *
  * Consider organizing styles into separate files for maintainability.
- *
- *= require_tree .
- *= require_self
  */
 
 /* top */
@@ -22,7 +19,7 @@
 }
 form.contact-form {
   width: 100%;
-  /* max-width: 380px; */
+  max-width: 380px;
   margin: 10px auto;
   font-size: 15.5px;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -198,5 +195,5 @@ form.contact-form ul li input[type="submit"]:hover {
 form.contact-form ul li input[type="submit"]:active {
   background: #d0d0d0;
 }
-/* https://form.run/media/contents/form-creation-tools/contact-form_html/ */
 /* top */
+
