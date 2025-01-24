@@ -17,7 +17,7 @@ class AccountsController < ApplicationController
     if @account.save
       #render @account, notice: 'お問い合わせが送信されました。'
       # かっこ悪い、あとで何とかする
-      redirect_to "#{supported_protocol}#{request.host_with_port}/accounts/#{@account.id}", notice: 'お問い合わせが送信されました。'
+      redirect_to "#{supported_protocol}#{request.host_with_port}/accounts/#{@account.id}"
     else
       render :index, status: :unprocessable_entity
     end

@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def supported_protocol
-    "http://"
+    "https://"
   end
 
   def dynamic_account_create_url
