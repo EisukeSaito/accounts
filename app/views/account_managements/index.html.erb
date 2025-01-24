@@ -1,0 +1,26 @@
+<h1>登録情報一覧</h1>
+
+<table class="Account-Table">
+  <thead>
+    <tr>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>電話番号</th>
+      <th>生年月日</th>
+      <th>連絡方法</th>
+      <th>登録日時</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= account.name %></td>
+        <td><%= account.email %></td>
+        <td><%= account.phone %></td>
+        <td><%= account.birthday %></td>
+        <td><%= account.contact_info %></td>
+        <td><%= account.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,36 +1,39 @@
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<span> Contact Us! </span>
 
-<form action="" class="contact-form">
+<div class="Form">
+  <%= form_with model: @account, url: dynamic_account_create_url, local: true, class: "Form-Wrapper" do |form| %>
+    <%= form.hidden_field :route, value: 1 %>
+    <div class="Form-Item <%= 'Form-Item-Error' if @account.errors[:email].any? %>">
+      <p class="Form-Item-Label">
+        <span class="Form-Item-Label-Required">必須</span>メールアドレス
+      </p>
+      <%= form.email_field :email, class: "Form-Item-Input", placeholder: "例）example@gmail.com" %>
+    </div>
 
-  <span>Contact Us!</span>
-
-  <ul>
-    <li>
-      <i class="fa fa-user form-icon"></i>
-      <input type="text" placeholder="Name" />
-    </li>
-    <li>
-      <i class="fa fa-at form-icon"></i>
-      <input type="text" placeholder="Email" />
-    </li>
-    <li>
-      <i class="fa fa-university form-icon"></i>
-      <input type="text" placeholder="Organization/Academic Institution" />
-    </li>
-    <li>
-      <i class="fa fa-phone form-icon"></i>
-      <input type="text" placeholder="Phone" />
-    </li>
-    <li>
-      <i class="fa fa-paper-plane form-icon"></i>
-      <input type="text" placeholder="Subject" />
-    </li>
-    <li>
-      <i class="fa fa-envelope form-icon"></i>
-      <textarea placeholder="Message" rows="2"></textarea>
-    </li>
-    <li>
-      <input type="submit" placeholder="Submit" />
-    </li>
-  </ul>
-</form>
+    <div class="Form-Item <%= 'Form-Item-Error' if @account.errors[:name].any? %>">
+      <p class="Form-Item-Label">
+        <span class="Form-Item-Label-Required">必須</span>氏名
+      </p>
+      <%= form.text_field :name, class: "Form-Item-Input", placeholder: "例）山田太郎" %>
+    </div>
+    <div class="Form-Item">
+      <p class="Form-Item-Label">
+        <span class="Form-Item-Label-Any">任意</span>電話番号
+      </p>
+      <%= form.text_field :phone, class: "Form-Item-Input", placeholder: "例）09010002000" %>
+    </div>
+    <div class="Form-Item">
+      <p class="Form-Item-Label">
+        <span class="Form-Item-Label-Any">任意</span>生年月日
+      </p>
+      <%= form.text_field :birthday, class: "Form-Item-Input", placeholder: "例）19800101" %>
+    </div>
+    <div class="Form-Item">
+      <p class="Form-Item-Label isMsg">
+        <span class="Form-Item-Label-Any">任意</span>連絡方法について
+      </p>
+      <%= form.text_area :contact_info, class: "Form-Item-Textarea", placeholder: "ご希望の連絡手段や、時間帯などありましたらご記入ください。" %>
+    </div>
+    <%= form.submit "送信する", class: "Form-Btn" %>
+  <% end %>
+</div>
