@@ -11,7 +11,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   #root "accounts#index"
-  resources :accounts, only: [:index, :show, :create]
+  resources :accounts, only: [:index, :show, :create] do
+    get 'redirect_line_account', on: :collection
+    post 'add_line_info', on: :member
+  end
 
   resources :account_managements, only: [:index]
 end

@@ -194,6 +194,97 @@ span {
 }
 /* top */
 
+/* LINE bottun */
+.button-line a {
+    background: #06c755;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 15em;/*幅*/
+    padding: 15px 15px;/*文字横空白*/
+    color: #fff!important;
+    transition: 0.3s ease-in-out;
+    font-weight: 600;
+    color: #fff!important;
+    text-decoration: none;
+	border-radius: 40px;/*丸み*/
+	 border: 1px solid #c18f21;
+	font-size: 1.2rem;/*文字サイズ*/
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.3);  /*影*/
+}
+
+ /*文字前アイコン*/
+/*
+.button-line a:before {
+    position: relative;
+    font-family: "Font Awesome 5 Free";
+	content: '\f4ad';
+  font-weight: 900;
+    margin-right: 8px;
+    color: #fff;
+}
+*/
+
+ /*マウスホバー時演出*/
+.button-line a:hover {
+    background: #66cdaa;
+    color: #FFF;
+}
+/* LINE bottun */
+
+/* メールアドレス取得の同意 */
+/* コンテナ */
+.container {
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 15px;/*文字横空白*/
+    padding-top: 16px;
+    padding-bottom: 16px;
+    width: 100%;
+    max-width: 720px;
+}
+
+/* カードスタイル */
+.card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* タイトル */
+.card h2 {
+    font-size: 1.5rem;
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+/* テキストとリスト */
+.card p {
+    font-size: 1rem;
+    color: #555555;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.card ul {
+    margin: 10px 0;
+    padding-left: 20px;
+    color: #555555;
+}
+
+.card ul li {
+    margin-bottom: 5px;
+}
+/* メールアドレス取得の同意 */
+
 /* account_manager */
 .Account-Table {
   width: 100%;

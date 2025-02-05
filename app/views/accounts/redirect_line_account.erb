@@ -1,0 +1,51 @@
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // LIFF初期化
+  liff.init({
+    liffId: "<%= ENV['LIFF_ID'] %>", // 作成したLIFFアプリのIDを指定
+  })
+  .then(() => {
+    if (!liff.isLoggedIn()) {
+      liff.login(); // ログインしていない場合はログイン
+    } else {
+      // ユーザー情報を取得
+      liff.getProfile()
+        .then(profile => {
+          const userId = profile.userId; // LINEユーザーID
+          const displayName = profile.displayName; // 表示名
+          const email = liff.getDecodedIDToken().email; // メールアドレス
+
+          // 取得した情報をサーバーに送信
+          sendUserDataToServer(userId, displayName, email);
+          window.location.href = "<%= ENV['LINE_PROFILE_URL'] %>";
+
+        })
+        .catch(err => {
+          console.error("Error getting profile:", err);
+        });
+    }
+  })
+  .catch(err => {
+    console.error("LIFF Initialization failed:", err);
+  });
+});
+
+// サーバーにユーザー情報を送信する関数
+function sendUserDataToServer(userId, displayName, email) {
+  fetch("/accounts/1/add_line_info", { // サーバーのエンドポイント
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_id: userId,
+      display_name: displayName,
+      email: email,
+    }),
+    mode: 'cors'
+  })
+  .catch(err => {
+    console.error("Error sending user data to server:", err);
+  });
+}
+</script>

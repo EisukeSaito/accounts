@@ -1,20 +1,41 @@
 <span> Contact Us! </span>
 
+<div class="button-line">
+  <a href="https://page.line.me/833bemxc">LINE 友達追加はこちら</a>
+</div>
+
+<div class="container">
+  <div class="card">
+    <h2>メールアドレスの利用について</h2>
+    <p> 本サービスでは、以下の目的でお客様のメールアドレスを取得し利用します： </p>
+    <ul>
+      <li>ログインやアカウント管理のため</li>
+      <li>サービス関連の重要なお知らせを送付するため</li>
+      <li>サポートやお問い合わせ対応のため</li>
+    </ul>
+    <p>
+      お客様の個人情報は、プライバシーポリシーに従い適切に管理いたします。
+    </p>
+  </div>
+</div>
+
+
 <div class="Form">
   <%= form_with model: @account, url: dynamic_account_create_url, local: true, class: "Form-Wrapper" do |form| %>
     <%= form.hidden_field :route, value: 1 %>
+    <%= form.hidden_field :line_user_id, value: 1, id: "line_user_id_field" %>
     <div class="Form-Item <%= 'Form-Item-Error' if @account.errors[:email].any? %>">
       <p class="Form-Item-Label">
         <span class="Form-Item-Label-Required">必須</span>メールアドレス
       </p>
-      <%= form.email_field :email, class: "Form-Item-Input", placeholder: "例）example@gmail.com" %>
+      <%= form.email_field :email, id: "email-field", class: "Form-Item-Input", placeholder: "例）example@gmail.com" %>
     </div>
 
     <div class="Form-Item <%= 'Form-Item-Error' if @account.errors[:name].any? %>">
       <p class="Form-Item-Label">
         <span class="Form-Item-Label-Required">必須</span>氏名
       </p>
-      <%= form.text_field :name, class: "Form-Item-Input", placeholder: "例）山田太郎" %>
+      <%= form.text_field :name, id: "name-field", class: "Form-Item-Input", placeholder: "例）山田太郎" %>
     </div>
     <div class="Form-Item">
       <p class="Form-Item-Label">
@@ -37,3 +58,71 @@
     <%= form.submit "送信する", class: "Form-Btn" %>
   <% end %>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  // LIFF初期化
+  liff.init({
+    liffId: "<%= ENV['LIFF_ID'] %>", // 作成したLIFFアプリのIDを指定
+  })
+  .then(() => {
+    if (!liff.isLoggedIn()) {
+      liff.login(); // ログインしていない場合はログイン
+    } else {
+      // ユーザー情報を取得
+      liff.getProfile()
+        .then(profile => {
+          const userId = profile.userId; // LINEユーザーID
+          const displayName = profile.displayName; // 表示名
+          const email = liff.getDecodedIDToken().email; // メールアドレス
+          console.log(`User ID: ${userId}`);
+          console.log(`Display Name: ${displayName}`);
+          console.log(`email: ${email}`);
+
+          // 取得した情報をサーバーに送信
+          sendUserDataToServer(userId, displayName, email);
+
+          // フォームに設定
+          document.getElementById("line_user_id_field").value = userId;
+          if (displayName) {
+            document.getElementById("name-field").value = displayName;
+          }
+          if (email) {
+            document.getElementById("email-field").value = email;
+          }
+        })
+        .catch(err => {
+          console.error("Error getting profile:", err);
+        });
+    }
+  })
+  .catch(err => {
+    console.error("LIFF Initialization failed:", err);
+  });
+});
+
+// サーバーにユーザー情報を送信する関数
+function sendUserDataToServer(userId, displayName, email) {
+  fetch("/accounts/1/add_line_info", { // サーバーのエンドポイント
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_id: userId,
+      display_name: displayName,
+      email: email,
+    }),
+    mode: 'cors'
+  })
+  /*
+  .then(response => response.json())
+  .then(data => {
+    console.log("Server response:", data);
+  })
+  */
+  .catch(err => {
+    console.error("Error sending user data to server:", err);
+  });
+}
+</script>
