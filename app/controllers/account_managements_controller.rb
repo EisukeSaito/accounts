@@ -1,6 +1,5 @@
 class AccountManagementsController < ApplicationController
-  # 本番環境の時は以下を無視できるように考える
-  skip_before_action :verify_authenticity_token, only: [:create]
+  before_action :authenticate, only: [:index]
 
   include ApplicationHelper
 
@@ -8,4 +7,11 @@ class AccountManagementsController < ApplicationController
     @accounts = Account.all.order(created_at: :desc)
   end
 
+  private
+
+  def authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV['BASIC_AUTH_USER'] && password == ENV['BASIC_AUTH_PASSWORD']
+    end
+  end
 end
