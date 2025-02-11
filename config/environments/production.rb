@@ -88,4 +88,5 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
   # 許可するホスト名を指定
   config.hosts << "esaito-dev.com"
+  config.hosts << "job-systems-tools.com"
 end
