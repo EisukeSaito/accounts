@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   .then(() => {
     if (!liff.isLoggedIn()) {
-      liff.login(); // ログインしていない場合はログイン
+      //liff.login(); // ログインしていない場合はログイン
+      window.location.href = "<%= ENV['LINE_PROFILE_URL'] %>"; // ログインしていない場合はprofileにリダイレクト
     } else {
       // ユーザー情報を取得
       liff.getProfile()
