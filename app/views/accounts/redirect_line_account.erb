@@ -6,8 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   .then(() => {
     if (!liff.isLoggedIn()) {
-      //liff.login(); // ログインしていない場合はログイン
-      window.location.href = "<%= ENV['LINE_PROFILE_URL'] %>"; // ログインしていない場合はprofileにリダイレクト
+      liff.login(); // ログインしていない場合はログイン
     } else {
       // ユーザー情報を取得
       liff.getProfile()
@@ -23,11 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(err => {
           console.error("Error getting profile:", err);
+          window.location.href = "<%= ENV['LINE_PROFILE_URL'] %>";
         });
     }
   })
   .catch(err => {
     console.error("LIFF Initialization failed:", err);
+    window.location.href = "<%= ENV['LINE_PROFILE_URL'] %>";
   });
 });
 
