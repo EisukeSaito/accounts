@@ -1,0 +1,36 @@
+<h1>登録情報詳細</h1>
+
+<ul class="user_details">
+  <li class="user_detail">
+    <h3>■ ユーザーID</h3>
+    <h4><%= @account.line_user_id %></h4>
+  </li>
+  <li class="user_detail">
+    <h3>■ 名前</h3>
+    <h4><%= @account.name %></h4>
+  </li>
+  <li class="user_detail">
+    <h3>■ メールアドレス</h3>
+    <h4><%= @account.email %></h4>
+  </li>
+  <li class="user_detail">
+    <h3>■ 電話番号</h3>
+    <h4><%= @account.phone %></h4>
+  </li>
+  <li class="user_detail">
+    <h3>■ 誕生日</h3>
+    <h4><%= @account.birthday %></h4>
+  </li>
+  <li class="user_detail">
+    <h3>■ 連絡方法</h3>
+    <h4><%= @account.contact_info %></h4>
+  </li>
+  <li class="user_detail">
+    <h3>■ 登録日時</h3>
+    <h4><%= @account.created_at.strftime('%Y-%m-%d %H:%M:%S') %></h4>
+  </li>
+  <li class="user_detail">
+    <h3>■ ユーザー更新日時</h3>
+    <h4><%= @account.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></h4>
+  </li>
+</ul>

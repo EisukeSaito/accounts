@@ -7,6 +7,10 @@ class AccountManagementsController < ApplicationController
     @accounts = Account.all.order(created_at: :desc)
   end
 
+  def show
+    @account = Account.find_by(line_user_id: params[:id])
+  end
+
   private
 
   def authenticate

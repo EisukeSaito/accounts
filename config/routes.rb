@@ -16,5 +16,5 @@ Rails.application.routes.draw do
     post 'add_line_info', on: :member
   end
 
-  resources :account_managements, only: [:index]
+  resources :account_managements, only: [:index, :show]
 end
